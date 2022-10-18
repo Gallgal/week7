@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		@import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+
+.nanummyeongjo * {
+ font-family: 'Nanum Myeongjo', serif;
+}
+		body{background: black;
+			font-family: 'Nanum Myeongjo', serif;
+			font-size: 14pt;
+			color: white;
+			text-align: center;}
+		#lE{color: lightgray;
+			font-size: 1rem; line-height: 1.5rem;}
+		#lK{line-height: 1.5rem;}
+		.intro{width:  60vw; position: relative;top: 20vh; margin: auto;}
+		.intro2{width: 15vw; height: 15vw; background: white; position: absolute; left: 23vw; top: 12vw;}
+		.lyric{position: absolute; width: 400px ;bottom: 10vh; left: 50vw; opacity: 1; transform: translateX(-200px);}
+		.ain{animation:ani 1s forwards;}
+		@keyframes ani{from{opacity: 0;}to{opacity: 1;}}
+	</style>
+</head>
+<body>
+	<div class="intro">
+	<img src="intro.gif" style="width:  60vw;">
+	<div class="intro2" id="introBox">
+		<span style="color: black;line-height: 15vw;"><i>Click me!</i></span>
+	</div></div>
+
+	<audio src="bgm.mp3" id="bgm"></audio>
+	<audio src="baby.mp3" id="baby"></audio>
+	<div class="lyric"><span id="lE"></span><br><span id="lK"></span></div>
+
+<script type="text/javascript">
+	introBox.onclick = function(){
+	baby.play();
+	babyS();
+	setTimeout(babyS,3000);
+		function babyS(){
+		bgm.play()
+		}
+
+	introBox.style.display = 'none';}
+
+
+
+	var lyricsEng = "Wise men say /Only fools rush in /But I can't help /falling in love with you /Shall I stay? /Would it be a sin /If I can't help falling in love with you? /Like a river flows /Surely to the sea /Darling, so it goes /Some things are meant to be /Take my hand /Take my whole life, too /For I can't help falling in love with you/Like a river flows /Surely to the sea /Darling, so it goes /Some things are meant to be /Take my hand /Take my whole life, too /For I can't help falling in love with you/For I can't help falling in love with you";
+	var lyricsE = lyricsEng.split("/");
+	var lyricsKor = "현명한 사람들은 말해요, /사랑에 빠지는 건 바보같은 일이라고. /하지만 저는요, /당신을 사랑할 수 밖에 없는 걸요? /곁에 있어도 될까요? /제가 그래도 될까요? /내가 당신을 사랑할 수 밖에 없다면요./강이 흘러 흘러 /바다로 흘러가듯이 /사랑스런 사람아, 결국 그렇게 될 거예요 /어떤 일들은 때론 거스를 수  없대요. /내 손을 잡아주세요 /내 인생도 전부 가져가세요 /난 당신을 사랑하지 않을 수 없으니까요./강이 흘러 흘러 /바다로 흘러가듯이 /사랑스런 사람아, 결국 그렇게 될 거예요 /어떤 일들은 때론 거스를 수  없대요. /내 손을 잡아주세요 /내 인생도 전부 가져가세요 /난 당신을 사랑하지 않을 수 없으니까요./난 당신을 사랑하지 않을 수 없으니까요.";
+	var lyricsK = lyricsKor.split("/");
+
+//---------------
+
+	var s = 0;
+	var n =0;
+	var myTimer = setInterval(lyricsL,7000);
+	var myTimer2 = setInterval(lyricsM,7000);
+	function lyricsL(){
+		var l = lyricsK[s++];
+		document.getElementById("lK").innerHTML = l
+		l.className = "ani"
+		if (s== lyricsK.length){clearInterval(myTimer);
+	}
+}
+	function lyricsM(){
+		document.getElementById("lE").innerHTML = lyricsE[n++];
+		if (n== lyricsE.length){clearInterval(myTimer2);}
+	}
+
+	//---------------------
+	let stop = true;
+		window.onkeydown = function(e){
+			if(e.keyCode == 32 && stop){
+			bgm.pause();
+
+			stop = false;
+			}else if(e.keyCode == 32){
+				bgm.play();
+				stop = true;
+			}
+		}
+
+</script>
+</body>
+</html>
